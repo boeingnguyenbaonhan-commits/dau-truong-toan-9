@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Đấu Trường Toán 9</title>
+<style>
+:root{--bg:#101827;--panel:#182438;--text:#f4f7fb;--muted:#a9b7ca;--accent:#70e1c1;--gold:#ffd166;--bad:#ff7b86}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#203552,#101827 58%);color:var(--text);font:16px system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh;padding:22px}main{max-width:760px;margin:auto}.brand{color:var(--accent);font-weight:800;letter-spacing:2px;font-size:12px}.hero{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:12px 0 20px}h1{font-size:clamp(27px,6vw,42px);line-height:1.08;margin:6px 0}.sub{color:var(--muted);margin:8px 0}.pill{background:#263a53;border:1px solid #3a506b;border-radius:99px;padding:8px 12px;font-size:13px;white-space:nowrap}.card{background:linear-gradient(145deg,#1b2a40,#172337);border:1px solid #30445e;border-radius:22px;padding:clamp(18px,4vw,28px);box-shadow:0 18px 45px #0003}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}.stat{background:#111d2e;border-radius:14px;padding:12px;text-align:center}.stat b{display:block;font-size:22px;color:var(--gold)}.stat span{font-size:12px;color:var(--muted)}.progress{height:8px;background:#0d1726;border-radius:99px;overflow:hidden;margin:12px 0 22px}.bar{height:100%;background:var(--accent);width:0%;transition:width .25s}.tag{color:var(--accent);font-size:13px;font-weight:700}.question{font-size:clamp(23px,5vw,32px);font-weight:750;margin:12px 0 22px;line-height:1.35}.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ans{background:#253750;color:var(--text);border:1px solid #3b526f;border-radius:14px;padding:16px;text-align:left;font-size:17px;min-height:58px;cursor:pointer}.ans:hover{border-color:var(--accent);background:#2c4561}.ans:disabled{cursor:default;opacity:.9}.ans.correct{background:#174b42;border-color:var(--accent)}.ans.wrong{background:#552c3a;border-color:var(--bad)}.row{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}.btn{border:0;border-radius:12px;padding:13px 18px;background:var(--accent);color:#10251f;font-weight:800;font-size:15px;cursor:pointer}.btn.secondary{background:#2a3d56;color:var(--text);border:1px solid #435a76}.btn:disabled{opacity:.45;cursor:not--allowed}.feedback{margin-top:15px;padding:13px 15px;border-radius:12px;background:#101d2e;color:var(--muted);min-height:48px}.feedback.good{color:#9cf0d8}.feedback.no{color:#ffabb3}.hidden{display:none}.center{text-align:center}.big{font-size:52px;margin:8px}.topics{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 20px}.topic{background:#263a53;border-radius:9px;padding:7px 10px;color:#d8e4f2;font-size:12px}
+@media(max-width:480px){body{padding:14px}.answers{grid-template-columns:1fr}.hero{align-items:flex-start}.pill{font-size:12px}.stats{gap:7px}.stat{padding:10px 5px}}
+</style>
+<meta name="theme-color" content="#101827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Toán 9">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+</head><body><main>
+<div class="brand">MATH QUEST · GRADE 9</div><div class="hero"><div><h1>Đấu Trường<br>Toán Học 9</h1><p class="sub">Giải câu hỏi · Vượt ải · Săn điểm số</p></div><div class="pill">⚡ 10 câu / lượt</div></div>
+<section id="start" class="card"><div class="tag">PHIÊN BẢN MỞ RỘNG</div><h2>Chinh phục Toán 9</h2><p class="sub">Ngân hàng 35 câu hỏi thuộc nhiều chuyên đề. Mỗi lượt chọn ngẫu nhiên 10 câu, có giới hạn thời gian, tính điểm và giải thích đáp án.</p><div class="topics"><span class="topic">Căn thức</span><span class="topic">Phương trình</span><span class="topic">Hệ phương trình</span><span class="topic">Hàm số</span><span class="topic">Viète</span><span class="topic">Hình học</span><span class="topic">Lượng giác</span></div><div class="stats"><div class="stat"><b>35</b><span>NGÂN HÀNG CÂU</span></div><div class="stat"><b>15s</b><span>MỖI CÂU</span></div><div class="stat"><b>10</b><span>CÂU / LƯỢT</span></div></div><button class="btn" id="startBtn">BẮT ĐẦU CHƠI →</button></section>
+<section id="game" class="card hidden"><div class="stats"><div class="stat"><b id="score">0</b><span>ĐIỂM</span></div><div class="stat"><b id="level">1/10</b><span>CÂU HỎI</span></div><div class="stat"><b id="time">15</b><span>GIÂY</span></div></div><div class="progress"><div class="bar" id="bar"></div></div><div class="tag" id="topic">CHUYÊN ĐỀ</div><div class="question" id="question"></div><div class="answers" id="answers"></div><div class="feedback" id="feedback" aria-live="polite">Chọn đáp án đúng nhất nhé!</div><div class="row"><span class="sub" id="combo">🔥 Combo: 0</span><button class="btn secondary" id="nextBtn" disabled>Câu tiếp theo →</button></div></section>
+<section id="end" class="card hidden center"><div class="big" id="medal">🏆</div><div class="tag">KẾT THÚC LƯỢT CHƠI</div><h2 id="resultTitle">Hoàn thành!</h2><p class="sub" id="resultText"></p><div class="stats"><div class="stat"><b id="finalScore">0</b><span>TỔNG ĐIỂM</span></div><div class="stat"><b id="rightCount">0/10</b><span>ĐÚNG</span></div><div class="stat"><b id="bestCombo">0</b><span>COMBO CAO NHẤT</span></div></div><button class="btn" id="againBtn">CHƠI LẠI ↻</button></section>
+</main><script>
+(()=>{
+const $=id=>document.getElementById(id);
+const bank=[
+["CĂN THỨC","Rút gọn √72 được kết quả nào?",["6√2","4√3","8√2","12√2"],0,"√72 = √(36 × 2) = 6√2."],
+["PHƯƠNG TRÌNH","Giải phương trình 3x − 12 = 0.",["x = 3","x = 4","x = −4","x = 12"],1,"3x = 12 nên x = 4."],
+["HÀM SỐ","Cho y = −2x + 5. Khi x = 3 thì y bằng bao nhiêu?",["−1","1","11","−6"],0,"Thay x = 3: y = −2 × 3 + 5 = −1."],
+["PHƯƠNG TRÌNH BẬC HAI","Biệt thức Δ của x² − 7x + 10 = 0 là:",["9","49","−9","89"],0,"Δ = b² − 4ac = 49 − 40 = 9."],
+["HỆ PHƯƠNG TRÌNH","Nghiệm của hệ x + y = 7; x − y = 1 là:",["(3; 4)","(4; 3)","(5; 2)","(2; 5)"],1,"Cộng hai phương trình được 2x = 8, suy ra x = 4 và y = 3."],
+["CĂN THỨC","Điều kiện xác định của √(2x − 6) là:",["x < 3","x ≥ 3","x > 3","x ≤ 3"],1,"Biểu thức dưới căn không âm: 2x − 6 ≥ 0."],
+["HÌNH HỌC","Tam giác vuông có hai cạnh góc vuông 6 cm và 8 cm. Cạnh huyền dài:",["9 cm","10 cm","12 cm","14 cm"],1,"Theo định lý Pythagore: c² = 6² + 8² = 100."],
+["ĐƯỜNG TRÒN","Đường kính của đường tròn bán kính 4,5 cm là:",["2,25 cm","4,5 cm","9 cm","18 cm"],2,"Đường kính bằng hai lần bán kính: 2 × 4,5 = 9 cm."],
+["VIÈTE","Tích hai nghiệm của 2x² − 5x + 3 = 0 bằng:",["−5/2","3/2","5/2","−3/2"],1,"Theo Viète, tích hai nghiệm bằng c/a = 3/2."],
+["HÌNH HỌC","Một đường tròn có bán kính 3 cm. Diện tích hình tròn là:",["6π cm²","9π cm²","12π cm²","18π cm²"],1,"S = πr² = π × 3² = 9π cm²."],
+["HỆ PHƯƠNG TRÌNH","Giải hệ 2x + y = 8; x − y = 1.",["(2; 4)","(3; 2)","(4; 0)","(1; 6)"],1,"Cộng hai phương trình: 3x = 9 nên x = 3, y = 2."],
+["HÀM SỐ","Đường thẳng y = 3x − 2 cắt trục tung tại điểm nào?",["(0; 3)","(−2; 0)","(0; −2)","(2; 0)"],2,"Trên trục tung thì x = 0, suy ra y = −2."],
+["CĂN THỨC","Rút gọn √48 − √12 bằng:",["2√3","3√3","4√3","√3"],0,"√48 = 4√3 và √12 = 2√3, hiệu là 2√3."],
+["LƯỢNG GIÁC","Trong tam giác vuông, sin của một góc nhọn bằng:",["Cạnh kề / cạnh huyền","Cạnh đối / cạnh huyền","Cạnh đối / cạnh kề","Cạnh huyền / cạnh đối"],1,"Sin góc nhọn bằng tỉ số cạnh đối trên cạnh huyền."],
+["PHƯƠNG TRÌNH BẬC HAI","Phương trình x² − 4x + 4 = 0 có nghiệm là:",["x = 2 (nghiệm kép)","x = −2 và x = 2","x = 4 và x = 0","Vô nghiệm"],0,"x² − 4x + 4 = (x − 2)² nên có nghiệm kép x = 2."],
+["CĂN THỨC","Rút gọn √200 bằng:",["10√2","20√2","5√2","2√10"],0,"√200 = √(100 × 2) = 10√2."],
+["PHƯƠNG TRÌNH","Nghiệm của 5(x − 2) = 15 là:",["x = 1","x = 3","x = 5","x = 7"],2,"Chia hai vế cho 5: x − 2 = 3 nên x = 5."],
+["HÀM SỐ","Hệ số góc của đường thẳng y = −4x + 7 là:",["7","4","−4","−7"],2,"Với y = ax + b, hệ số góc là a = −4."],
+["VIÈTE","Tổng hai nghiệm của x² + 6x + 5 = 0 bằng:",["6","−6","5","−5"],1,"Theo Viète, tổng hai nghiệm là −b/a = −6."],
+["HÌNH HỌC","Tam giác vuông có cạnh huyền 13 cm, một cạnh góc vuông 5 cm. Cạnh còn lại là:",["8 cm","10 cm","12 cm","14 cm"],2,"Cạnh còn lại = √(13² − 5²) = √144 = 12 cm."],
+["CĂN THỨC","Giá trị của √81 − √16 là:",["5","7","9","13"],0,"√81 − √16 = 9 − 4 = 5."],
+["PHƯƠNG TRÌNH BẬC HAI","Phương trình x² + 2x + 5 = 0 có:",["Hai nghiệm phân biệt","Nghiệm kép","Vô nghiệm trong R","Một nghiệm bằng 0"],2,"Δ = 2² − 4 × 1 × 5 = −16 < 0."],
+["HỆ PHƯƠNG TRÌNH","Nghiệm của hệ x + y = 5; 2x − y = 4 là:",["(2; 3)","(3; 2)","(4; 1)","(1; 4)"],1,"Cộng hai phương trình: 3x = 9 nên x = 3, y = 2."],
+["ĐƯỜNG TRÒN","Chu vi đường tròn bán kính 5 cm là:",["5π cm","10π cm","15π cm","25π cm"],1,"C = 2πr = 2π × 5 = 10π cm."],
+["LƯỢNG GIÁC","Trong tam giác vuông, cos của góc nhọn bằng:",["Cạnh đối / cạnh huyền","Cạnh kề / cạnh huyền","Cạnh đối / cạnh kề","Cạnh huyền / cạnh kề"],1,"Cos góc nhọn bằng cạnh kề chia cạnh huyền."],
+["CĂN THỨC","Điều kiện xác định của √(5 − x) là:",["x ≥ 5","x > 5","x ≤ 5","x < 5"],2,"5 − x ≥ 0 nên x ≤ 5."],
+["VIÈTE","Hai số có tổng 7 và tích 12 là:",["2 và 5","3 và 4","1 và 6","−3 và −4"],1,"3 + 4 = 7 và 3 × 4 = 12."],
+["HÌNH HỌC","Một góc nội tiếp chắn nửa đường tròn có số đo:",["45°","60°","90°","180°"],2,"Góc nội tiếp chắn nửa đường tròn là góc vuông."],
+["PHƯƠNG TRÌNH","Giải phương trình (x − 1)(x + 3) = 0.",["x = 1 hoặc x = −3","x = −1 hoặc x = 3","x = 1 hoặc x = 3","x = −1 hoặc x = −3"],0,"Tích bằng 0 khi một trong hai thừa số bằng 0."],
+["HÀM SỐ","Điểm nào thuộc đồ thị y = 2x − 1?",["(1; 0)","(2; 3)","(0; 1)","(−1; 1)"],1,"Với x = 2, y = 4 − 1 = 3."],
+["CĂN THỨC","Rút gọn 3√2 + 5√2 bằng:",["8√2","8√4","15√2","2√2"],0,"Hai căn thức đồng dạng nên cộng hệ số: (3 + 5)√2."],
+["VIÈTE","Nếu x₁, x₂ là nghiệm của x² − 3x − 4 = 0 thì x₁ + x₂ bằng:",["−3","3","−4","4"],1,"Theo Viète, tổng nghiệm = −b/a = 3."],
+["HÌNH HỌC","Diện tích hình quạt 90° của đường tròn bán kính 4 cm là:",["2π cm²","4π cm²","8π cm²","16π cm²"],1,"Hình quạt 90° chiếm 1/4 hình tròn: (1/4)π × 4² = 4π."],
+["PHƯƠNG TRÌNH BẬC HAI","Phương trình 3x² − 12 = 0 có nghiệm:",["x = ±2","x = ±4","x = 2 và x = 4","x = −2 và x = 4"],0,"3x² = 12 nên x² = 4, suy ra x = ±2."],
+["HỆ PHƯƠNG TRÌNH","Nếu x + y = 9 và x = 2y thì (x; y) bằng:",["(3; 6)","(6; 3)","(5; 4)","(4; 5)"],1,"Thay x = 2y: 3y = 9 nên y = 3 và x = 6."]
+];
+let questions=[],idx=0,score=0,right=0,combo=0,best=0,time=15,timer=null,locked=false;
+function shuffle(a){let b=[...a];for(let i=b.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function start(){clearInterval(timer);questions=shuffle(bank).slice(0,10);idx=score=right=combo=best=0;$('start').classList.add('hidden');$('end').classList.add('hidden');$('game').classList.remove('hidden');show()}
+function show(){locked=false;time=15;$('time').textContent=time;$('score').textContent=score;$('level').textContent=(idx+1)+'/10';$('bar').style.width=(idx/10*100)+'%';$('topic').textContent=questions[idx][0];$('question').textContent=questions[idx][1];$('feedback').className='feedback';$('feedback').textContent='Chọn đáp án đúng nhất nhé!';$('combo').textContent='🔥 Combo: '+combo;$('nextBtn').disabled=true;$('nextBtn').textContent=idx===9?'Xem kết quả →':'Câu tiếp theo →';let wrap=$('answers');wrap.innerHTML='';questions[idx][2].forEach((v,i)=>{let b=document.createElement('button');b.className='ans';b.textContent=String.fromCharCode(65+i)+'. '+v;b.addEventListener('click',()=>answer(i));wrap.appendChild(b)});clearInterval(timer);timer=setInterval(()=>{time--;$('time').textContent=time;if(time<=0){clearInterval(timer);answer(-1)}},1000)}
+function answer(choice){if(locked)return;locked=true;clearInterval(timer);let q=questions[idx],ok=choice===q[3];[...$('answers').children].forEach((b,i)=>{b.disabled=true;if(i===q[3])b.classList.add('correct');if(i===choice&&!ok)b.classList.add('wrong')});if(ok){right++;combo++;best=Math.max(best,combo);let earned=100+Math.max(0,time)*5+(combo>1?combo*10:0);score+=earned;$('feedback').className='feedback good';$('feedback').textContent='✓ Chính xác! +'+earned+' điểm. '+q[4]}else{combo=0;$('feedback').className='feedback no';$('feedback').textContent=(choice===-1?'Hết giờ! ':'Chưa đúng. ')+q[4]}$('score').textContent=score;$('combo').textContent='🔥 Combo: '+combo;$('nextBtn').disabled=false}
+function next(){if(!locked)return;if(idx<9){idx++;show()}else finish()}
+function finish(){clearInterval(timer);$('game').classList.add('hidden');$('end').classList.remove('hidden');$('finalScore').textContent=score;$('rightCount').textContent=right+'/10';$('bestCombo').textContent=best;$('medal').textContent=right>=9?'🏆':right>=7?'🥇':right>=5?'🥈':'💪';$('resultTitle').textContent=right>=9?'Siêu cao thủ Toán 9!':right>=7?'Rất xuất sắc!':right>=5?'Khá lắm, cố lên!':'Đừng bỏ cuộc nhé!';$('resultText').textContent='Bạn trả lời đúng '+right+'/10 câu trong ngân hàng 35 câu. '+(right===10?'Hoàn hảo!':'Chơi thêm một lượt để thử bộ câu hỏi khác nhé!')}
+$('startBtn').addEventListener('click',start);$('againBtn').addEventListener('click',start);$('nextBtn').addEventListener('click',next);
+})();
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js").catch(err => {
+      console.log("Service worker registration failed:", err);
+    });
+  });
+}
+</script>
+
+</body></html>
